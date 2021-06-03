@@ -17,5 +17,3 @@
 - Soleonoid's pull (unlock) when both sensors classify user movement as non-falling.
 - Solenoid's will stay locked after a fall event; and will unlock after 5 consecutives of non-fall readings.
 - Fall detection accuracy for my movements is 94.5%, false positive rate is 6.5%, false negative rate is 2.8% for a 300 ms sampling interval.
-
-
