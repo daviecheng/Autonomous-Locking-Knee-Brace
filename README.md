@@ -41,7 +41,8 @@
 > Put all the classifiers into one file and rename the variables. Ex: predict_c, maxVotes_c, predictLabel_c, idxToLabel_c for chest sensor
 
 ## Standalone ML Arduino
-1. Upload "FallDetectionRF" Arduino code to Mega board.
+1. Upload "FallDetectionRF" Arduino code to Arduino IDE.
 2. Include the Random Forest classifier .h file into the same folder as the "FallDetectionRF" Arduino code.
-3. Setup the circuit as shown below and upload the Arduino code.
+3. Adjust the code corresponding to your variable names.
+4. Setup the circuit as shown below; then upload the code to Mega board.
 <img src="https://user-images.githubusercontent.com/84931559/120695492-76e8fe80-c479-11eb-82a4-1e4a17a5788e.png">
