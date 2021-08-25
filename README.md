@@ -1,4 +1,4 @@
-# Autonomous-Locking-Knee-Brace
+# Autonomous_Locking_Knee_Brace
 
 ## Summary
 > An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum preset flexion of the knee brace when a fall is detected.
