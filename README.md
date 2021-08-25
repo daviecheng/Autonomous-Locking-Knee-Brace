@@ -27,7 +27,7 @@
 3. Run 'getTrainingData.m'
 4. The collected training data is stored in your workspace variable 'trainingData'. Copy the training data to a CSV file and manually input the label as 1 for falling, or 0 for non-falling in the last column. The CSV files for my training data is included for reference.
 > Note: I suggest performing two experiments for simplicity. One for falling and the other for non-falling.
-6. Continue to run 'getTrainingData.m' to gather training data.
+5. Continue to run 'getTrainingData.m' to gather training data.
 
 ## Export Random Forest Classifier to C++
 1. Upload 'rfc' Python program.
