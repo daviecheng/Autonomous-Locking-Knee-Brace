@@ -1,21 +1,19 @@
 # Autonomous-Locking-Knee-Brace
 
 ## Summary
-> An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum flexion of the knee brace (set by user) when a fall is detected.
+> An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum preset flexion of the knee brace when a fall is detected.
 
+- Sensor placement is on chest and hip.
 - Uses Random Forest classifier machine learning algorithm.
+- Approximately 1000 training data samples for each label (falling and nonfalling).
 - Features of Random Forest classifier include:
   - Mean x, y, and z acceleration
   - Mean x, y, and z gyro
   - Mean triaxial acceleration and gyro magnitude
   - Mean x, y, and z RMS acceleration
   - Mean x, y, and z RMS gyro
-- Approximately 1000 training data samples for each label (falling and nonfalling).
-- Sensor placement is on chest and hip.
-- 2 push-pull solenoid motors attached to both sides of knee brace. Push to lock maximum flexion. Pull to unlock or to allow free leg movement.
-- Solenoid's push (lock) when either sensor classify user movement as falling.
-- Soleonoid's pull (unlock) when both sensors classify user movement as non-falling.
-- Solenoid's will stay locked after a fall event; and will unlock after 5 consecutives of non-fall readings.
+- 2 push-pull solenoid motors attached to both sides of knee brace to lock and unlock.
+- Solenoid's will stay locked after a fall event; and will unlock after 5 consecutive non-fall readings.
 - Fall detection accuracy for my movements is 94.5%, false positive rate is 6.5%, false negative rate is 2.8% for a 300 ms sampling interval.
 
 
@@ -28,7 +26,8 @@
 
 3. Run 'getTrainingData.m'
 4. The collected training data is stored in your workspace variable 'trainingData'. Copy the training data to a CSV file and manually input the label as 1 for falling, or 0 for non-falling in the last column. The CSV files for my training data is included for reference.
-5. Continue to run 'getTrainingData.m' to gather training data.
+> Note: I suggest performing two experiments for simplicity. One for falling and the other for non-falling.
+6. Continue to run 'getTrainingData.m' to gather training data.
 
 ## Export Random Forest Classifier to C++
 1. Upload 'rfc' Python program.
@@ -38,7 +37,6 @@
 5. Change the data type of the fucntions 'maxVotes', 'predictLabel', and 'idxToLabel' to 'int' variable types.
 6. Save the output as a .h file.
 7. Repeat Steps 2-6 for multiple Random Forest classifiers.
-> Put all the classifiers into one file and rename the variables. Ex: predict_c, maxVotes_c, predictLabel_c, idxToLabel_c for chest sensor
 
 ## Standalone ML Arduino
 1. Upload "FallDetectionRF" Arduino code to Arduino IDE.
