@@ -1,17 +1,19 @@
 # Autonomous_Locking_Knee_Brace
 
+### NYIT Senior Design Project 2020-21
+***No responsibility disclaimer - This project is a proof of concept and is not intended as a substitute for professional use.***
 ## Summary
-> An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum preset flexion of the knee brace when a fall is detected.
+> An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum preset flexion of the knee brace when a fall is detected. Proof of concept project aimed to prevent leg injury in elderly users when falling when used alongside their existing mobility aids.
+
+
 
 - Sensor placement is on chest and hip.
 - Uses Random Forest classifier machine learning algorithm.
 - Approximately 1000 training data samples for each label (falling and nonfalling).
-- Features of Random Forest classifier include:
-  - Mean x, y, and z acceleration
-  - Mean x, y, and z gyro
+- Features of Random Forest classifier:
+  - Mean x, y, and z acceleration and gyro
   - Mean triaxial acceleration and gyro magnitude
-  - Mean x, y, and z RMS acceleration
-  - Mean x, y, and z RMS gyro
+  - Mean x, y, and z RMS acceleration and gyro
 - 2 push-pull solenoid motors attached to both sides of knee brace to lock and unlock.
 - Solenoid's will stay locked after a fall event; and will unlock after 5 consecutive non-fall readings.
 - Fall detection accuracy for my movements is 94.5%, false positive rate is 6.5%, false negative rate is 2.8% for a 300 ms sampling interval.
