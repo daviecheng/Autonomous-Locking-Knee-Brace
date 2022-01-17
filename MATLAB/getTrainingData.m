@@ -1,9 +1,8 @@
 % Description: Program gets Training Data
 
-% Before running, upload the 'mpu6050_output' Arduino code to the Uno Board
-% Change the COM of this program to your own COM (line 31)
-% The sampling rate for training data can be changed on line 39
-%   -> setting to a small sampling rates may cause errors
+% Before running, upload the 'sensor.ino' to microcontroller.
+% Change the COM of this program to your own COM (line 30)
+% The sampling rate for training data can be changed on line 38
 % You may experience errors running the program; rerun it until it works.
 %--------------------------------------------------------------------------
 
@@ -28,7 +27,7 @@ save('trainingData.mat','trainingData');
 temp=[];    % temporarily stores extracted serial port output 
 count=1; % visual number to see number of samples extracted
 
-sensor = serial('COM3', 'BaudRate',115200);
+sensor = serial('COM6', 'BaudRate',115200);
 fclose(sensor);
 fopen(sensor);
 
