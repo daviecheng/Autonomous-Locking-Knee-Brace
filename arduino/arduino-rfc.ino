@@ -1,22 +1,21 @@
 /*  Arduino Code for Standalone Fall Detection
- *   Description: For the given sampling rate, the model gathers 20 raw data samples and calculates the features
- *   for the duration. If either the chest or hip sensor predicts a fall event, the preset flexion is locked.
- *   If not, it will check if the brace is locked and wait for 5 consecutive nonfalls to unlock.
  *   
- *   The code may occasionally stop working. I presume a delay is needed to handle the amount of data being gathered.
+ *   Description: For the set sampling rate, the model gathers 20 raw data samples and calculates the features
+ *   of the Random Forest classifier for the duration. If either the chest or hip sensor predicts a fall event, 
+ *   the preset flexion is locked. 
+ *   
  */
 
 
 #include <Wire.h>
 #include <SoftwareSerial.h>
-#include "chestHipKneeRF.h" // Random Forest classifier C code
+#include "chestHipRF.h" // Random Forest classifier
 #define NUM_SAMPLES 20  // num samples per duration process
 
-
-const int MPU1=0x68, MPU2=0x69; // chest and hip sensor
+const int MPU1=0x68, MPU2=0x69; // 0x68 -> chest sensor, 0x69 -> hip sensor
 int consecNonfall=16;           // consecutive nonfalls until unlock (300ms*16 ~= 5s until unlock)
 
-// Digital pins for the two push-pull solenoid motors.
+// Pins for the two push-pull solenoid motors.
 int solenoidPin1 = 9;           
 int solenoidPin2 = 10;
 
@@ -59,12 +58,7 @@ float hipFeatures[14];  // hip features for the duration
 int hipLabel; // hip prediction
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-
-unsigned long time; // to find sampling rate or to find delay for a sampling rate
-int fall; // store number of falls (used for confuse matrix)
-int nonfall;  // store number of nonfalls (used for confuse matrix)
-
-Eloquent::ML::Port::RandomForest clf; // using Random Forest Classifier
+Eloquent::ML::Port::RandomForest clf; // to use C code with Random Forest classifier
 
 
 void setup() {
@@ -78,79 +72,30 @@ void setup() {
   // initialize chest and hip sensors
   setupMPU1();
   setupMPU2();
-  
-  time =0;
-
-  // set number of falls and nonfalls to zero
-  fall=0;
-  nonfall=0;
 }
 
 
 void loop() {
-  
   resetFeatures();  //  reset the chest and hip features from previous duration
   getDurationData();  // get duration raw sensor values
-
-  /*Uncomment Below to check sampling time or to find a delay for sampling time.*/
-//  time = millis();
-//  Serial.print("Collected Duration Data Time: ");
-//  Serial.println(time);
-
-  getDurationFeatures();  // get features for duration
-
-  /* Uncomment Below to see raw duration data and duration features*/
-//  printDurationData();  
-//  printFeatures();
-  
+  getDurationFeatures();  // get features for duration  
   chestLabel = getChestLabel(); // chest prediction for duration
   hipLabel = getHipLabel(); // hip prediction for duration
 
-  // See chest and hip labels for duration
-  Serial.println();
-  Serial.print("Chest Sensor: ");
-  Serial.print(chestLabel);
-  Serial.print("    Hip Sensor: ");
-  Serial.print(hipLabel);
-
-  
-  // Lock or Check to Unlock
   if(chestLabel == 1 || hipLabel == 1){ // if either chest or hip predicts a fall event -> lock flexion
-    Serial.println(" ==> Brace Lock");
     digitalWrite(solenoidPin1, LOW);
     digitalWrite(solenoidPin2, LOW);
     consecNonfall=0;  // reset consecutive nonfalls to zero
-    fall+=1;  // serial reading to see how much fall events has occured
   }
   else{
-    if(consecNonfall!=16){  // unlock after 5 seconds of consecutive nonfall readings for both chest and hip sensor
-      Serial.println();
-      Serial.print("Waiting for consecutive 7 consecutive nonfalls to unlock: ");
+    if(consecNonfall!=16){  // waiting for 5 consecutive nonfall readings for both chest and hip sensor.
       consecNonfall+=1; // continue to wait for unlock
-      Serial.println(consecNonfall);  
     }
     else{
-      Serial.println(" ==> Brace Unlocked");  // unlock the set flexion
       digitalWrite(solenoidPin1, HIGH);
       digitalWrite(solenoidPin2, HIGH);
     }
-    nonfall+=1; // serial reading to see how much nonfall events has occured
   }
-
-
-  /* Uncomment Below and its counterpart on line 102*/
-//  Serial.print("Sample Reading Finish ... ");
-//  time = millis();
-//  Serial.println(time);
-
-  /* Uncomment Below to see number of falls and nonfalls*/
-//  Serial.print("Fall: ");
-//  Serial.print(fall);
-//  Serial.print("    Nonfall: ");
-//  Serial.println(nonfall);
-//  Serial.println();
-//  Serial.println();
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------
