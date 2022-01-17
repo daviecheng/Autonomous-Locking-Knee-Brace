@@ -1,8 +1,8 @@
 /*
 Description of Code: 
-Output MPU 6050 sensor triaxial acceleration and gyroscope values to serial port.
+Get sensor data.
 
-The code is provided by EEEnthusiast with my modifications.
+The software is provided by EEEnthusiast with my modifications.
 EEEnthusiast Website: http://eeenthusiast.com/
 */
 
