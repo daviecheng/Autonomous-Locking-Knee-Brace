@@ -78,7 +78,7 @@ clear m;
 td_size=size(trainingData);
 td_row=td_size(1);
 disp(td_row);
-if td_row ~= 20
+if td_row ~= 20 % gather 20 training samples
     assignin('base','rawData',[]);
     assignin('base','counter',1);
 else 
