@@ -3,9 +3,7 @@
 ### NYIT Senior Design Project 2020-21
 ***No responsibility disclaimer - This project is a proof of concept and is not intended as a substitute for professional use.***
 ## Summary
-> An automatic device that distinguishes user movements as falling or non-falling; and locks the maximum preset flexion of the knee brace when a fall is detected. Proof of concept project aimed to prevent leg injury in elderly users when falling when used alongside their existing mobility aids.
-
-
+> An automatic device that locks the preset flexion on knee brace when a fall is detected. Proof of concept project aimed to prevent leg injury in elderly users when falling when used alongside their existing mobility aids.
 
 - Sensor placement is on chest and hip.
 - Uses Random Forest classifier machine learning algorithm.
@@ -21,7 +19,7 @@
 
 # Setup
 ## Get Training Data
-1. Upload 'mpu6050_output' Arduino code to Uno board.
+1. Upload 'sensor' Arduino code to Uno board.
 2. In MATLAB, have 'getTrainingData.m' and 'getFeatures.m' in the environment.
 > Setup the circuit as shown below.
 <img src="https://user-images.githubusercontent.com/84931559/120691398-697d4580-c474-11eb-9fd0-e62b2ad93697.png" width="700">
@@ -41,8 +39,8 @@
 7. Repeat Steps 2-6 for multiple Random Forest classifiers.
 
 ## Standalone ML Arduino
-1. Upload "FallDetectionRF" Arduino code to Arduino IDE.
-2. Include the Random Forest classifier .h file into the same folder as the "FallDetectionRF" Arduino code.
+1. Upload "arduino-rfc" Arduino code to Arduino IDE.
+2. Include the Random Forest classifier .h file into the same folder as the "arduino-rfc" Arduino code.
 3. Adjust the code corresponding to your variable names.
 4. Setup the circuit as shown below; then upload the code to Mega board.
 <img src="https://user-images.githubusercontent.com/84931559/120695492-76e8fe80-c479-11eb-82a4-1e4a17a5788e.png">
