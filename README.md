@@ -25,12 +25,12 @@
 <img src="https://user-images.githubusercontent.com/84931559/120691398-697d4580-c474-11eb-9fd0-e62b2ad93697.png" width="700">
 
 3. Run 'getTrainingData.m'
-4. The collected training data is stored in your workspace variable 'trainingData'. Copy the training data to a CSV file and manually input the label as 1 for falling, or 0 for non-falling in the last column. The CSV files for my training data is included for reference.
+4. The collected training data is stored in your workspace variable 'trainingData'. Copy the training data to a CSV file and manually input the label as 1 for falling and 0 for non-falling in the last column. The CSV files for my training data is included for reference.
 > Note: I suggest performing two experiments for simplicity. One for falling and the other for non-falling.
 5. Continue to run 'getTrainingData.m' to gather training data.
 
 ## Export Random Forest Classifier to C++
-1. Upload 'rfc' Python program.
+1. Load 'rfc' Python program.
 2. Replace the path with your CSV path that contains your training data.
 3. Run the Python script and the output is your Random Forest classifier code in C++. 
 4. Copy the output to a text editor. Remove the "#include cstdarg" statement from the output.
